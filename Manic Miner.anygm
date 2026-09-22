@@ -1,0 +1,11 @@
+[anygm]
+# Manic Miner (GameMaker Studio 2)
+payload=data.win
+
+[overrides]
+# [Render at game resolution] The content owns a 1024x768 application surface. Resize that surface
+# and its host window together to present the requested 256x192 logical raster without cropping.
+?gameres @application_w=256
+?gameres @application_h=192
+?gameres @window_w=256
+?gameres @window_h=192

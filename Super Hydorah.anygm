@@ -1,0 +1,20 @@
+[anygm]
+# Super Hydorah (GameMaker Studio 2)
+payload=data.win
+
+[overrides]
+# A, B or Start skips the two publisher/developer logos in room 0.
+introskip|0
+
+# The game's window-resize helper draws a white border and lower-right handle for 60 frames after
+# any pointer movement. Keep its visual hint hidden without disabling the pointer or resizing.
+obj_mouse:show_lines=0
+
+# [Render at game resolution] The game composes a 320x180 raster. Its video setup caches the window
+# and application-surface size, so a live switch from an outer monitor raster must reset both pairs
+# to the authored extent. The 320x160 camera remains a viewport inside this raster: the other 20
+# rows belong to the frame and must not be cut away.
+?gameres @window_w=320
+?gameres @window_h=180
+?gameres @application_w=320
+?gameres @application_h=180

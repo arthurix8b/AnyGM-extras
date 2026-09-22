@@ -1,0 +1,21 @@
+cheats = 5
+
+cheat0_desc = "Immunity (player takes no damage)"
+cheat0_code = "$immunity=1"
+cheat0_enable = false
+
+cheat1_desc = "Infinite health (takes damage, but loses no hearts)"
+cheat1_code = "$infinite_health=1"
+cheat1_enable = false
+
+cheat2_desc = "Stop the timer (holds it where it is; a new stage still resets it)"
+cheat2_code = "alarmpause|obj_player|1"
+cheat2_enable = false
+
+cheat3_desc = "All 5 Moura's tears (opens the sealed gate)"
+cheat3_code = "$gem_1=1;$gem_2=1;$gem_3=1;$gem_4=1;$gem_5=1"
+cheat3_enable = false
+
+cheat4_desc = "Testing mode (game debug flags + DEV MENU in pause)"
+cheat4_code = "$testing_mode=1"
+cheat4_enable = false

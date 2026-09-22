@@ -1,0 +1,13 @@
+[anygm]
+# Hydorah (GameMaker 8.1)
+payload=Hydorah.exe
+
+[overrides]
+# [Render at game resolution] The game draws its whole world into a 320x160 surface and blits it
+# at screen_scale, then lays a 640x320 CRT mask over the result. Presenting the canvas itself
+# means the blit stops multiplying, the classic window follows the port, and the mask - which
+# only exists at the outer size - has nothing left to cover.
+?gameres obj_old_tv:screen_scale=1
+?gameres view_wport[0]=320
+?gameres view_hport[0]=160
+?gameres surface|obj_old_tv|tv|1|1

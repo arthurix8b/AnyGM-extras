@@ -1,0 +1,16 @@
+[anygm]
+# Undertale (GameMaker Studio 1)
+payload=data.win
+
+[overrides]
+# [Render at game resolution] Nothing in this game multiplies its own raster: every exploration
+# room is authored with a 320x240 view inside a 640x480 port, so the doubling is the runner
+# scaling the view into the port. Following the view with the port presents what the game draws.
+#
+# Battle rooms are the exception: room_floweybattle and its siblings are authored 640x480 1:1,
+# view == port, no doubling at all. A literal 320/240 here forced their GUI camera down to a
+# quarter of their own composed frame - reported 2026-08-20, everything shrunk to the top-left
+# corner on entering a fight. $view_w/$view_h read each room's own authored view live, so this
+# now follows the room instead of carrying one room's number into every other.
+?gameres view_wport[0]=$view_w
+?gameres view_hport[0]=$view_h

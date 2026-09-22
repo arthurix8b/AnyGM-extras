@@ -1,0 +1,18 @@
+[anygm]
+# Maldita Castilla, arcade cabinet build (GameMaker Studio 1)
+payload=data.win
+
+[overrides]
+# [Aspect] The game-owned CRT compositor and overlay span the full forced frame.
+?aspect @compositor_fullwidth=1
+
+# [Aspect] Pause menu backdrop covers the full frame.
+?aspect obj_pause_menu@Draw_0->backdrop
+
+# [Aspect] Default fades span the full forced width.
+?aspect obj_fade_in:image_xscale=$forced_w/288
+?aspect obj_fade_out:image_xscale=$forced_w/288
+
+# [Aspect] Keep the active view target centred and use the full visible gameplay width.
+?aspect @center_view_target=1
+?aspect @wide_gameplay_view=1

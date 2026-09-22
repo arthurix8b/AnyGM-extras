@@ -1,0 +1,11 @@
+[anygm]
+# Momodora I (GameMaker 7)
+payload=momo1_v151.exe
+
+[overrides]
+# [Render at game resolution] screen_init reads Screensize from momo.config.ini and blits the
+# game own 320x240 canvas at that multiple. Holding the multiplier at 1 and following it with
+# the view port presents the canvas, whatever the settings file asks for.
+?gameres screener:screen_scale=1
+?gameres view_wport[0]=320
+?gameres view_hport[0]=240

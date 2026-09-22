@@ -1,0 +1,10 @@
+[anygm]
+# Momodora II (GameMaker 7)
+payload=momodora2.exe
+
+[overrides]
+# [Render at game resolution] Same presentation as Momodora I: a 320x240 canvas blitted at the
+# Screensize multiplier from momo.config.ini.
+?gameres screener:screen_scale=1
+?gameres view_wport[0]=320
+?gameres view_hport[0]=240

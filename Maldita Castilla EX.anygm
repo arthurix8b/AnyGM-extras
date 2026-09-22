@@ -1,0 +1,42 @@
+[anygm]
+# Maldita Castilla EX / Cursed Castilla
+payload=data.win
+
+[overrides]
+# A, B or Start skips the splash and map screens.
+# Rooms: 1=abylogo 3=rom_check 4=intro 10=town_map 16=road_map 21=bonus_1_map
+#        23=alcazar_map 30=swamp_map 38=bonus_2_map 40=catacombs_map
+#        48=aqueduct_map 55=bonus_3_map 57=forest_map 70=hell_map
+# (login=2 is deliberately left out: it is interactive and initialises the profile)
+introskip|1,3,4,10,16,21,23,30,38,40,48,55,57,70
+
+# [Aspect] CRT compositor spans the full forced-wide frame
+?aspect @compositor_fullwidth=1
+# The full-width policy pairs window queries with a transient GUI projection.
+# Do not persist forced GUI sizes: later aspect selections must not inherit them.
+
+# [Aspect] Pause menu backdrop covers the full frame
+?aspect obj_pause_menu@Draw_0->backdrop
+
+# [Aspect] Fade-in covers the full frame
+?aspect obj_fade_in@Draw_0->full_view
+
+# [Aspect] Fade-out covers the full frame
+?aspect obj_fade_out@Draw_0->full_view
+
+# [Aspect] Use one clamped wide gameplay view from the first frame
+?aspect @wide_gameplay_view=1
+# Pickup captions use the widened camera and keep their cached midpoint current.
+?aspect obj_message@Draw_0->full_view
+?aspect obj_message:text_x=$forced_w/2
+# [Render at game resolution] The 288x216 raster is already what this game draws; scr_setup_video
+# resizes the application surface to the view in every one of its eight video modes, so none of
+# them is a different raster. What they do change is the decoration over it, and the mode pins
+# that to video mode 2 with its shader off. video_mode alone is not enough: the options menu sets
+# it and calls scr_setup_video in the same frame, which derives these four from whichever mode was
+# picked, so each is held at what mode 2 leaves behind and the menu selection stops being visible.
+?gameres $video_mode=2
+?gameres $shader_enable=0
+?gameres $surface_enable=0
+?gameres $bezel_image=76
+?gameres $hints_scale=1

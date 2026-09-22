@@ -1,0 +1,17 @@
+[anygm]
+payload=data.win
+
+[overrides]
+# Render at game resolution: the game's logical raster is 320x240.
+?gameres $screenScale=1
+?gameres $screenWid=320
+?gameres $screenHei=240
+?gameres $screenWidHalf=160
+?gameres $screenHeiHalf=120
+?gameres @window_w=320
+?gameres @window_h=240
+?gameres @application_w=320
+?gameres @application_h=240
+
+# Apply the game's own controller setup once after startup.
+call|AutoConfig

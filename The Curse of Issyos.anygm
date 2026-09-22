@@ -1,0 +1,49 @@
+[anygm]
+# The Curse of Issyos (GameMaker Studio 1)
+payload=data.win
+
+[overrides]
+# [Render at game resolution] The game composes its own screen: a 320x240 picture built from a
+# 32-row HUD and its 320x208 world, held in one surface. Its Draw GUI then either presents that
+# surface 1:1 into a 320x240 GUI, or - when its own `overlay` setting is on - doubles it into a
+# 640x480 GUI and lays a CRT mask over the result. The mask and the doubling are the same flag,
+# and both exist only at the outer size, so presenting the game's own raster clears it.
+#
+# The window is pinned because the game sizes its own from config.ini and the shipped file is
+# empty: `window_set_size` then receives the read defaults of 1x1, and the presentation fits a
+# 320x240 GUI into that degenerate extent as a 320x320 canvas - the blank bands above and below
+# the picture that this directive removes.
+#
+# The literal is safe for the whole payload: all 37 rooms were dumped one by one and every one of
+# them declares `port=(0,0,320,240)`. The view is 320x208 everywhere except `init`, which is
+# 320x240.
+# The setting is held at zero for the drawing only, not frozen: the pause menu still shows the
+# player's own choice, toggling it still works, and the game still writes it back to config.ini
+# when it ends. Only the branch that composes the screen reads the held value.
+?gameres drawhold|overlay|0
+?gameres @window_w=320
+?gameres @window_h=240
+# [Render at game resolution] The game's screen shake lives inside the same `overlay` branch as the
+# doubling and the CRT mask: with the flag on it draws its composed surface at `screen_shake`, and
+# with the flag off it draws it at zero. Freezing the flag above therefore takes the feedback away
+# with the decoration. The shake is two pixels of a GUI that holds the surface at 2x, so it is one
+# pixel of the game's own raster, and this restores exactly that.
+#
+# It answers to the same setting the original does: in the original the shake lives inside the
+# overlay branch, so a player with the overlay off never sees it. The value scope reads the choice
+# the hold above leaves intact, so the shake follows the menu rather than the presentation.
+?gameres ?global.overlay @present_shift_y=$global.screen_shake/2
+
+# [Aspect] The complete canvas is 320x240: a fixed-coordinate HUD above the 320x208 world.
+# Keep the HUD centred at its native height; its black clear covers the entire forced width.
+# Expand the application image without vertical rescaling, clipping rooms narrower than the view.
+?aspect surface_canvas|obj_control|gui_surface|320|240
+# The activation region must include the entire visible world. Retain the game's follow target,
+# speed and room-edge clamps, but widen its horizontal border to keep the player centred while
+# scrolling. Leaving the native border unchanged creates a large off-centre movement band.
+?aspect @wide_gameplay_view=1
+?aspect view_hborder[0]=$forced_w/2
+# Pickup/status notices are separate from the centred upper HUD. Their Draw event recomputes
+# position from the view every frame; use the visible room intersection so the right-hand anchor
+# cannot land in a clipped side band when a room is narrower than the forced viewport.
+?aspect obj_message@Draw_0->visible_view

@@ -1,0 +1,20 @@
+# Iji — skip the display-mode question.
+#
+# rom_resolution (room index 59) is the first room the game plays. It draws
+# "Press Enter to run Iji in fullscreen mode (recommended)." and waits: Enter
+# arms alarm 1, which calls set_graphics_mode and raises global.runfullscreen,
+# and alarm 0, which goes to the next room. Escape takes the windowed branch
+# and leaves that global alone.
+#
+# A libretro core does not own its window, so the set_graphics_mode half has no
+# meaning here; what the game itself reads afterwards is the global, twice, in
+# the gamma cover it draws over each frame. So this anchor answers the question
+# the way Enter answers it: take the next room in play order the moment room 59
+# is entered, and hold the global that answer sets.
+
+[anygm]
+payload=iji.exe
+
+[overrides]
+introauto|59
+$runfullscreen=1

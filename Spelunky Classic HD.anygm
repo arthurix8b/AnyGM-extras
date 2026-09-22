@@ -1,0 +1,33 @@
+[anygm]
+payload=data.anygm.win
+
+[overrides]
+# RetroArch owns fullscreen; ignore the runner's persisted fullscreen preference.
+$fullscreen=0
+# Rebuild the presentation values that the screen controller otherwise computes only at startup.
+monitorview|240|4:3|7:3
+?monitor @application_w=$monitor_view_w
+?monitor @application_h=$monitor_view_h
+?monitor $screenAspectRatio=$monitor_view_w/240
+?monitor $room_offset=$monitor_extra_w/2
+?monitor $display_w=$monitor_view_w
+?monitor $display_h=$monitor_view_h
+?monitor oScreen:screen_w=$monitor_w
+?monitor oScreen:screen_h=$monitor_h
+?monitor surface|oScreen|screen|$monitor_w|$monitor_h
+?monitor surface|oScreen|darkSurf|$monitor_w|$monitor_h
+?monitor surface|oScreen|pSurf|$monitor_view_w|$monitor_view_h
+?monitor view_wview[0]=$monitor_view_w
+?monitor view_hview[0]=$monitor_view_h
+?monitor view_wport[0]=$monitor_view_w
+?monitor view_hport[0]=$monitor_view_h
+?monitor camera[8-35]:width=$monitor_view_w
+?monitor camera[8-35]:height=$monitor_view_h
+?monitor camera[8-11,16-22,30]:x=0
+?monitor camera[12-15,23-29,32-33]:x=$monitor_extra_w*-0.5
+?monitor camera[31]:x=$monitor_extra_w*-1
+?monitor camera[34-35]:x=$monitor_view_w*-0.5+80
+view_wview[0]=$monitor_view_w
+view_hview[0]=$monitor_view_h
+view_wport[0]=$monitor_view_w
+view_hport[0]=$monitor_view_h

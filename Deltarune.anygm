@@ -1,0 +1,10 @@
+[anygm]
+# Deltarune (GameMaker Studio 2)
+payload=data.win
+
+[overrides]
+# [Render at game resolution] The selector and chapter payloads mix 320x240 exploration views
+# with 640x480 scenes and larger presentation ports. Follow each room's live authored view so the
+# port stops multiplying it without forcing one room's dimensions onto another.
+?gameres view_wport[0]=$view_w
+?gameres view_hport[0]=$view_h

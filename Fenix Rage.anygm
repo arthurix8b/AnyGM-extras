@@ -1,0 +1,18 @@
+[anygm]
+payload=data.win
+
+[overrides]
+# This build asks for a running Steam session, but only when it believes it is on Windows:
+# scr_steam_ini polls steam_initialised() sixty times and, under `if (os_type == os_windows)`
+# alone, sends the game to its "need Steam" room. Inside this runtime that belief is wrong, and
+# the non-Windows path is the game's own - the one it ships for the platforms it sells without
+# Steam. Nothing here defeats the check: it is answered truthfully and the game takes the branch
+# it wrote for that answer. 6 is os_linux.
+ostype|6
+
+# The opening rooms are authored 1366x920 with a 640x480 view and a 640x480 port, while the boot
+# room - and so the window this game opens - is 1024x768. Declaring the port as that window is what
+# scales the view into it; without it the picture is drawn at 640x480 into the top-left corner of
+# the frame and the rest of the frame is never written.
+view_wport[0]=1024
+view_hport[0]=768

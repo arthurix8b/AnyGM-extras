@@ -1,0 +1,13 @@
+[anygm]
+# l'Abbaye des morts (GameMaker Studio 1)
+payload=data.win
+
+[overrides]
+# [Render at game resolution] Keep the game's complete 288x216 compositor active, including its
+# optional noise layer, then publish only the central 256x192 playfield without resampling.
+?gameres @window_w=288
+?gameres @window_h=216
+?gameres @present_crop_left=16
+?gameres @present_crop_top=12
+?gameres @present_crop_right=16
+?gameres @present_crop_bottom=12
